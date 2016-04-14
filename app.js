@@ -13,6 +13,7 @@ var test = require('./routes/test');
 
 
 var app = express();
+var db = require('./db');
 
 
 // view engine setup
@@ -39,6 +40,19 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+// Connect to Mongo on start
+db.connect('mongodb://admin:admin@ds013280.mlab.com:13280/testlist', function(err) {
+  if (err) {
+    console.log('Unable to connect to Mongo.')
+    process.exit(1)
+  } else {
+    app.listen(3000, function() {
+      console.log('Listening on port 3000...')
+    })
+  }
+})
+
 
 // error handlers
 
