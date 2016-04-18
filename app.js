@@ -11,9 +11,15 @@ var users = require('./routes/users');
 // TEST
 var test = require('./routes/test');
 
-
 var app = express();
-var db = require('./db');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://test:test@ds013280.mlab.com:13280/testlist');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("we're connected!");
+});
 
 
 // view engine setup
@@ -42,7 +48,8 @@ app.use(function(req, res, next) {
 });
 
 // Connect to Mongo on start
-db.connect('mongodb://admin:admin@ds013280.mlab.com:13280/testlist', function(err) {
+/*
+db.connect('mongodb://test:test@ds013280.mlab.com:13280/testlist', function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.')
     process.exit(1)
@@ -52,7 +59,7 @@ db.connect('mongodb://admin:admin@ds013280.mlab.com:13280/testlist', function(er
     })
   }
 })
-
+*/
 
 // error handlers
 
