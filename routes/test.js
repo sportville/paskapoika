@@ -4,7 +4,8 @@ var router = express.Router();
 var Foods = require('../models/foods');
 
 router.get('/', function(req, res, next) {
-  Foods.findOne({ _id: req.params.id }, function(err, foods) {
+  Foods.find(function (err, foods) {
+    if (err) { console.log(err);}
     res.render('test', { title: foods.name });
   });
 });
