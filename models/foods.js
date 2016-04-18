@@ -4,5 +4,5 @@ var foodSchema = new mongoose.Schema({
   name : { type : String }
 });
 
-var foods = mongoose.model('foods', foodSchema);
-module.exports = foods;
+var Foods = mongoose.model('foods', foodSchema);
+module.exports = Foods;
